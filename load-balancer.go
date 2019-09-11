@@ -59,6 +59,7 @@ func NewLoadBalancer(listenPort int, backendStr string) *LoadBalancer {
 			portStr := fields[1]
 			port, err := strconv.Atoi(portStr)
 			if err == nil {
+				log.Printf("Adding backend %v:%v\n", host, port)
 				loadBalancer.BackendServers = append(loadBalancer.BackendServers, &BackendServer{
 					Host: host,
 					Port: port,
@@ -92,6 +93,7 @@ func (lb *LoadBalancer) Start() error {
 		return err
 	}
 
+	log.Printf("Listening on %v\n", serverAddr)
 	lb.listener, err = net.ListenTCP("tcp", serverAddr)
 	if err != nil {
 		return err
