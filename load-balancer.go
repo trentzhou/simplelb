@@ -197,7 +197,7 @@ func (lb *LoadBalancer) HandleConnectionPair(connPair *ProxyConn) {
 
 	connPair.BackConn = backConn
 	connPair.Name = backend.String()
-	//log.Printf("Starting %v", connPair)
+	log.Printf("Starting %v", connPair)
 	// Good, now we have both connection ready. Do book keeping
 	lb.Mutex.Lock()
 	lb.ConnPairs[connPair] = true
